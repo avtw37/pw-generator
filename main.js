@@ -64,6 +64,10 @@ function generatePassword(lower, upper, number, symbol, length) {
       generatedPassword += randomFunc[funcName]();
     });
   }
+
+  const finalPassword = generatedPassword.slice(0, length);
+
+  return finalPassword;
 }
 
 // Generator Functions - https://www.net-comber.com/charset.html
@@ -85,4 +89,4 @@ function getRandomSymbol() {
   return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
-console.log(getRandomSymbol());
+//console.log(getRandomSymbol());
