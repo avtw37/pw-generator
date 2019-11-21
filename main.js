@@ -1,13 +1,12 @@
 // DOM Elements
-const resultEl = document.getElementById('result');
-const lengthEl = document.getElementById('length');
-const uppercaseEl = document.getElementById('uppercase');
-const lowercaseEl = document.getElementById('lowercase');
-const numbersEl = document.getElementById('numbers');
-const symbolsEl = document.getElementById('symbols');
-const generateEl = document.getElementById('generate');
-const clipboardEl = document.getElementById('clipboard');
-
+const resultEl = document.getElementById("result");
+const lengthEl = document.getElementById("length");
+const uppercaseEl = document.getElementById("uppercase");
+const lowercaseEl = document.getElementById("lowercase");
+const numberEl = document.getElementById("numbers");
+const symbolsEl = document.getElementById("symbols");
+const generateEl = document.getElementById("generate");
+const clipboardEl = document.getElementById("clipboard");
 
 const randomFunc = {
   lower: getRandomLower,
@@ -16,7 +15,21 @@ const randomFunc = {
   symbol: getRandomSymbol
 };
 
+generateEl.addEventListener("click", () => {
+  const length = +lengthEl.value;
+  const hasLower = lowercaseEl.checked;
+  const hasUpper = uppercaseEl.checked;
+  const hasNumber = numberEl.checked;
+  const hasSymbol = symbolsEl.checked;
 
+  resultEl.innerText = generatePassword(
+    hasLower,
+    hasUpper,
+    hasNumber,
+    hasSymbol,
+    length
+  );
+});
 
 // Generator Functions
 
@@ -33,7 +46,7 @@ function getRandomNumber() {
 }
 
 function getRandomSymbol() {
-  const symbols = '!@#$%^&*(){}=<>/,.';
+  const symbols = "!@#$%^&*(){}=<>/,.";
   return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
