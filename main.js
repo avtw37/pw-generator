@@ -15,6 +15,7 @@ const randomFunc = {
   symbol: getRandomSymbol
 };
 
+// Generate Event Listen
 generateEl.addEventListener("click", () => {
   const length = +lengthEl.value;
   const hasLower = lowercaseEl.checked;
@@ -31,7 +32,41 @@ generateEl.addEventListener("click", () => {
   );
 });
 
-// Generator Functions
+// Generate password function
+function generatePassword(lower, upper, number, symbol, length) {
+  // 1. Init pw var
+  // 2. Filter out unchecked types
+  // 3. Loop over length call generator function for each type
+  // 4. Add final password to the pw var and return
+
+  let generatedPassword = "";
+
+  const typesCount = lower + upper + number + symbol;
+
+  //console.log("typesCount: ", typesCount);
+
+  const typesArr = [{ lower }, { upper }, { number }, { symbol }].filter(
+    item => Object.values(item)[0]
+  );
+
+  //console.log("typesArr: ", typesArr);
+
+  if (typesCount === 0) {
+    return '';
+  }
+
+  for (let i = 0; i < length; i += typesCount) {
+    typesArr.forEach(type => {
+      const funcName = Object.keys(type)[0];
+
+      //console.log('funcName: ', funcName);
+
+      generatedPassword += randomFunc[funcName]();
+    });
+  }
+}
+
+// Generator Functions - https://www.net-comber.com/charset.html
 
 function getRandomLower() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
